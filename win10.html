@@ -162,16 +162,17 @@
   <script>
     var t = 0;
     var percent = 0;
-    var interval = 2000;
+    var interval = 1000;
     var counter = setInterval(update, interval);
 
     function timeForEachPercent(percent) {
-      return percent * percent;
+      // sum(11 n), n in [1, 100] = 15.4 * 3600
+      return 11 * percent;
     }
 
     function update() {
       t++;
-      if (t > timeForEachPercent(percent)) {
+      if (t >= timeForEachPercent(percent + 1)) {
         percent++;
         if (percent >= 99)
           percent = 0;
