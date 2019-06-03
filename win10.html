@@ -158,41 +158,30 @@
     ga('create', 'UA-45751574-5', 'auto');
     ga('send', 'pageview');
   </script>
+
   <script>
-    var count = 0;
-    var stage = 1;
-    var stage2 = 3;
-    var counter = setInterval(timer, 14830); //1000 will  run it every 1 second
-    var ref = "Configuring updates";
+    var t = 0;
+    var percent = 0;
+    var interval = 2000;
+    var counter = setInterval(update, interval);
 
-    function timer() {
-      count = count + 1;
-      if (count <= 0) {
-        clearInterval(counter);
-        return;
+    function timeForEachPercent(percent) {
+      return percent * percent;
+    }
+
+    function update() {
+      t++;
+      if (t > timeForEachPercent(percent)) {
+        percent++;
+        if (percent >= 99)
+          percent = 0;
+
+        t = 0;
+        $('#timer').text(percent + '%');
       }
-
-      document.getElementById("timer").innerHTML = count + '%';
-
-
-
-      if (count > 99) {
-        stage = stage + 1;
-        document.getElementById("stage").innerHTML = stage + '';
-        count = 0;
-        return;
-      }
-
-      if (stage > 3) {
-        stage2 = 68;
-        ref = "Installing Updates";
-        document.getElementById("ref").innerHTML = ref + '';
-        document.getElementById("stage2").innerHTML = stage2 + '';
-        return;
-      }
-
     }
   </script>
+
   <style>
     body {
 
